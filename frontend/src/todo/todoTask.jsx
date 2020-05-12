@@ -6,23 +6,24 @@ export default (props) =>{
 
     const color = (priority)=>{
         if(priority==0){
-            return '#33ff49'
+            return '#70c0f0'
         }else if(priority==1){
-            return '#fff333'
+            return '#f0ec70'
         }else{
-            return '#ff3333'
+            return '#f07070'
         }
     }
 
     const renderRows= () =>{
         const list = props.father.list || []
+        let inputHelper = false;
         return list.map(todo=>(
             <tr key={todo._id}>
                 
-                {/* So consegui colocar duas cores para diferentes prioridades com o if ternario */}
-                {/*<td style={{backgroundColor: todo.priority == 0 ? '#ccffff' : '#ffcccc'}}>*/}
-                <td style={{ backgroundColor: `${color(todo.priority)}`}}> 
+                <td style={{ borderLeft: "4px solid" + `${color(todo.priority)}`}}> 
                 <p style={{color: todo.done ? '#C4B47E' : '#685206', fontWeight: 'italic', letterSpacing: '1px', fontSize: '12px'}}><b style={{textDecoration: todo.done ? 'line-through' : ''}}></b>{props.formatDate(todo.createdAt)}</p>
+                  
+                
                 <p style={{color: todo.done ? '#C4B47E' : '#685206', fontFamily: 'Open Sans', fontSize: '14px', lineHeight: '24px', margin: '0 0 10px', textAlign: 'justify', textJustify: 'inter-word'}}>
                     <b style={{textDecoration: todo.done ? 'line-through' : ''}}>{todo.name}</b>
                 </p>
@@ -35,6 +36,9 @@ export default (props) =>{
                         onClick={() => props.handleChangePriority(todo, props.father)}></IconButton>
                     <IconButton style='default' icon='trash-o' 
                         onClick={() => props.handleRemoveTask(todo, props.father)}></IconButton>
+                    <IconButton style='default' icon='pencil-square' 
+                        onClick={() => 
+                        props.handleEditTaskName(todo, props.father)}/>
                 </td>
             </tr>
         ))

@@ -5,8 +5,7 @@ export default props => (
 
         <div className='banner' style={{height: '600px'}}>
             <h1 className='banner-head'>
-                <p>Lista de tarefas</p>
-                <a href="#/todos" className='pure-button pure-button-primary' style={{background:'#2c4985'}}>Partiu</a>
+                <a href="#/todos" className='button one'>Lista de tarefas</a>
             </h1>
         </div>
 
@@ -14,7 +13,7 @@ export default props => (
             <div className='pricing-tables pure-g'>
                 <div className='pure-u-1 pure-u-md-1-4'>
                     <div className='pricing-table pricing-table-free'>
-                        <div className='pricing-table-header' style={{background:'#2c4985'}}>
+                        <div className='pricing-table-header' style={{background:'#70A1D7'}}>
                             <h2>Bonitu</h2>
 
                             <span className='pricing-table-price'>
@@ -36,7 +35,7 @@ export default props => (
 
                 <div className='pure-u-1 pure-u-md-1-4'>
                     <div className='pricing-table pricing-table-free'>
-                        <div className='pricing-table-header' style={{background:'#b4bd3b'}}>
+                        <div className='pricing-table-header' style={{background:'#f3d566'}}>
                             <h2>Rápido</h2>
 
                             <span className='pricing-table-price'>
@@ -58,7 +57,7 @@ export default props => (
 
                 <div className='pure-u-1 pure-u-md-1-4'>
                     <div className='pricing-table pricing-table-biz pricing-table-selected'>
-                        <div className='pricing-table-header'>
+                        <div className='pricing-table-header' style={{background:'#70A1D7'}}>
                             <h2>Eficiente</h2>
 
                             <span className='pricing-table-price'>
@@ -80,7 +79,7 @@ export default props => (
 
                 <div className='pure-u-1 pure-u-md-1-4'>
                     <div className='pricing-table pricing-table-enterprise'>
-                        <div className='pricing-table-header' style={{background:'#b4bd3b'}}>
+                        <div className='pricing-table-header' style={{background:'#f3d566'}}>
                             <h2>Aberto</h2>
 
                             <span className='pricing-table-price'>
@@ -140,7 +139,7 @@ export default props => (
                     </div>
                 </div>
             </div> 
-            <div style={{height:'40px'}}></div>
+            <div style={{height:'50px'}}></div>
         </div>
 
     </div>

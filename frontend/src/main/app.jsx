@@ -9,9 +9,8 @@ import Routes from './routes'
 import Footer from '../template/footer'
 
 export default props => (
-    <div style={{margin: '10px', width: "100%"}}> {/*Style tem que ser entre {{}}*/}
+    <div style={{padding: '10px', width: "100%"}}> {/*Style tem que ser entre {{}}*/}
         <Menu />
         <Routes />
-        <Footer />
     </div>
 )

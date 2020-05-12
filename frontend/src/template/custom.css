@@ -75,10 +75,10 @@ p {
  */
 
 .banner {
-    background: transparent url('http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg') 0 0 no-repeat fixed;
+    background: transparent url('https://images.unsplash.com/photo-1477346611705-65d1883cee1e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80') 0 0 no-repeat fixed;
     text-align: center;
     background-size: cover;
-    filter: progid: DXImageTransform.Microsoft.AlphaImageLoader(src='http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg', sizingMethod='scale');
+    filter: progid: DXImageTransform.Microsoft.AlphaImageLoader(src='https://images.unsplash.com/photo-1477346611705-65d1883cee1e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80', sizingMethod='scale');
     height: 200px;
     width: 100%;
     margin-bottom: 3em;
@@ -267,4 +267,55 @@ p {
     .banner-head {
         font-size: 3em;
     }
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.button {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 50px;
+    position: relative;
+    padding: 10px;
+}
+
+
+/* BUTTON EEN */
+
+a.button.one:before,
+a.button.one:after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    transition: all 0.3s ease;
+}
+
+a.button.one:before {
+    top: -2.5%;
+    left: -0%;
+    border-top: 5px solid white;
+    border-left: 5px solid white;
+}
+
+a.button.one:after {
+    bottom: -2.5%;
+    right: -0%;
+    border-bottom: 5px solid white;
+    border-right: 5px solid white;
+}
+
+a.button.one:hover:before,
+a.button.one:hover:after {
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+a.button.one:hover {
+    color: white;
+    text-decoration: none;
 }

@@ -29,8 +29,10 @@ export default class Todo extends Component {
         this.handleChangeColor  = this.handleChangeColor.bind(this)
         this.handleChangePriority= this.handleChangePriority.bind(this)
 
+        this.handleEditTaskName = this.handleEditTaskName.bind(this)
         this.handleEditListName = this.handleEditListName.bind(this)
         this.handleSetAllDone = this.handleSetAllDone.bind(this)
+
 
 
         this.refresh()
@@ -51,22 +53,21 @@ export default class Todo extends Component {
 
     handleChangeColor(todo){
         let color;
-        if(todo.color==="#fff") color = "#70A1D7"//azul
-        else if(todo.color==="#70A1D7") color = "#957DAD"//roxo
+        if(todo.color==="#70A1D7") color = "#957DAD"//roxo
         else if(todo.color==="#957DAD") color = "#87ba7b"//verde
         else if(todo.color==="#87ba7b") color = "#F47C7C"//vermelho
         else if(todo.color==="#F47C7C") color = "#704523"//marrom
-        else if(todo.color==="#704523") color = "#fff"//branco
+        else if(todo.color==="#704523") color = "#70A1D7"//branco
         
         axios.put(`${URL}/${todo._id}`, { ...todo, color: color })
             .then(resp => this.refresh())
     }
 
-    refresh(description = '') {
+    refresh(description = '', taskName = '') {
         const search = description ? `&description__regex=/${description}/` : ''
         axios.get(`${URL}?sort=createdAt${search}`)
             .then(resp => this.setState({
-                ...this.state, description, list:
+                ...this.state, description, taskName, list:
                     resp.data
             }))
     }
@@ -87,8 +88,9 @@ export default class Todo extends Component {
         const taskName = {name:this.state.taskName}
         todo.list.push(taskName)
 
-        axios.put(`${URL}/${todo._id}`, {...todo})
-            .then(resp => this.refresh())
+        if(taskName!='') 
+            axios.put(`${URL}/${todo._id}`, {...todo})
+                .then(resp => this.refresh())
     }
 
     handleRemoveTask(todo, father){
@@ -137,12 +139,32 @@ export default class Todo extends Component {
     }
 
     handleSetAllDone(todo){
-        for(var i=0; i<todo.list.length; i++){
-            todo.list[i].done=true
+        if(todo.list[0].done){
+            for(var i=0; i<todo.list.length; i++){
+                todo.list[i].done=false
+            }
+        }else{
+            for(var i=0; i<todo.list.length; i++){
+                todo.list[i].done=true
+            }
         }
-
         axios.put(`${URL}/${todo._id}`, { ...todo})
         .then(resp => this.refresh())
+    }
+
+    handleEditTaskName(todo, father){
+        const taskName = this.state.taskName
+        
+        for(var i=0; i<father.list.length; i++){
+            if(father.list[i]._id===todo._id){
+                father.list[i].name= taskName
+            }
+        }
+     
+        axios.put(`${URL}/${father._id}`, { ...father})
+        .then(resp => this.refresh())
+
+        
     }
 
 
@@ -150,13 +172,15 @@ export default class Todo extends Component {
     render() {
         return (
             <div>
-                <PageHeader name='Tarefas' small='Cadastro'></PageHeader>
+                <PageHeader small='Suas Listas'></PageHeader>
                 <TodoForm description={this.state.description}
                     handleChange={this.handleChange}
                     handleAdd={this.handleAdd}
                     handleSearch={this.handleSearch}
-                    handleClear={this.handleClear} />
-                <TodoList list={this.state.list}
+                    handleClear={this.handleClear} 
+                />
+                <TodoList task={this.state.taskName}
+                    list={this.state.list}
                     handleRemove={this.handleRemove}
                     handleAddTask={this.handleAddTask} 
                     handleRemoveTask={this.handleRemoveTask}
@@ -165,8 +189,10 @@ export default class Todo extends Component {
                     handleChangeColor={this.handleChangeColor}
                     handleChangePriority={this.handleChangePriority}
                     handleEditListName = {this.handleEditListName}
+                    handleEditTaskName = {this.handleEditTaskName}
                     handleSetAllDone = {this.handleSetAllDone}
-                    />
+                />
+                <div style={{height:'20px'}}></div>
             </div>
         )
     }
